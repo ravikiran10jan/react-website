@@ -22,7 +22,7 @@ CREATE TABLE "users" (
 
 
 
-INSERT INTO users (first_name, last_name, email,mobile,country_code,city,position,gender,password) VALUES('Ahmad ','hijjo','a7m4d.m.sh@gmail.com','0592043608','+972','gaza','student','femal','123');
+
 
 
 COMMIT;
