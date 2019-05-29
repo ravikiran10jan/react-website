@@ -9,6 +9,7 @@ require('env2')('./server/.env');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('port',  port);
+
 app.use(controllers);
 
 

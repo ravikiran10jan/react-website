@@ -9,6 +9,9 @@ const home = require('./home.js')
 router.post('/api/signup', signup.post);
 router.post('/api/login', login.post);
 router.post('/api/home',home.post)
+router.use('/api',(req,res)=>{
+  res.send("Reach")
+})
 
 
 
