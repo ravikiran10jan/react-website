@@ -45,6 +45,8 @@ handleInputChange = (e) => {
      .then(response => response.json())
      .then(response => {
       sessionStorage.setItem('token', response.token);
+      console.log("token",response.token);
+      
       this.setState(() => (
         {
           response: Object.assign({}, response),
@@ -52,7 +54,7 @@ handleInputChange = (e) => {
           tokenCheck: response.status
         }
       ))
-      response.status && (window.location = '/home')
+      response.status && (window.location = '/')
      })
      .catch (error => console.log("error fetch", error))
 
@@ -66,6 +68,7 @@ handleInputChange = (e) => {
 
 
 render(){
+  
   return(
     <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div className="wrapper wrapper--w680">

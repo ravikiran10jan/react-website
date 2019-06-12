@@ -17,7 +17,7 @@ class SelectBox extends Component {
           <option value="select">Select an Option</option>
           <option value="Student">Student</option>
           <option value="Employe">Employe</option>
-          <option value="Institation">Institation</option>
+          <option value="Institation">Institution</option>
         </select>
         <div className="select-dropdown"></div>
       </div>

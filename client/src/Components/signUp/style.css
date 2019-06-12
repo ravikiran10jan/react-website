@@ -347,7 +347,7 @@ input[type="date" i] {
 /* ==========================================================================
    #FORM
    ========================================================================== */
-input {
+/* input {
   outline: none;
   margin: 0;
   border: none;
@@ -357,7 +357,7 @@ input {
   width: 100%;
   font-size: 14px;
   font-family: inherit;
-}
+} */
 
 .input--style-4 {
   line-height: 50px;

@@ -5,7 +5,7 @@ exports.post = (req, res) => {
   const {
     firstName, lastName, email, mobile ,countryCode ,city ,selectedValue,radioOption,password
   } = req.body;
-  console.log("hiiiii",req.body);
+  
   
 
   

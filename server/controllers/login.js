@@ -5,12 +5,10 @@ const jwt = require('jsonwebtoken');
 
 exports.post = (req, res, next)=>{
   const {email, password} = req.body;
-console.log("login",req.body);
-console.log("hello login");
 
 
   passwordCheck(email, (err, results)=>{
-    console.log("email in db",email);
+
     
     if (err)  return next(err);
     if (!results.length) return res.send({msg: 'Sorry .. Username/Password invalid', status: false});
@@ -24,7 +22,7 @@ console.log("hello login");
       };
 
       jwt.sign(payload, process.env.SECRET, (errToken, token) => {
-        console.log('secret ', process.env.SECRET)
+      
         if (errToken) return next(errToken);
         return res.send({msg: 'Login Success', status: true, token});
 

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "concurrently": "^4.1.0",
     "env2": "^2.2.2",
     "express": "^4.16.4",
     "express-favicon": "^2.0.1",
