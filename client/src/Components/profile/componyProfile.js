@@ -4,7 +4,8 @@ import sessionCheckError from  './../../helpers/handleAuthentication';
 import './style.css';
 
 import SelectSkill from './selectSkill';
-import SelectIndustry from './selectIndustry'
+import SelectIndustry from './selectIndustry';
+import ImageUplode from './ImageUplode'
 
 /* eslint-disable*/
 class Profile extends Component {
@@ -28,8 +29,13 @@ class Profile extends Component {
         selectedLearnSkill: '',
         id:'',
         website:'',
-        institution:''
+        institution:'',
+        image: null,
       },
+
+      
+      url: '',
+      progress: 0,
      
      
      learnSkill : [
@@ -56,7 +62,10 @@ class Profile extends Component {
      
     };
 
-
+    this.handleChangeImage = this
+    .handleChangeImage
+    .bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
  
   }
 
@@ -106,6 +115,15 @@ class Profile extends Component {
       return { formData };
     });
   }
+  handleChangeImage = e => {
+    console.log("arive");
+    
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      // const img = this.state.formData.image;
+      this.setState({formData :{image}});
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -148,9 +166,32 @@ class Profile extends Component {
      });
   };
 
+  handleUpload = () => {
+    const {image} = this.state;
+    console.log("eman",this.state.formData.image);
+    //       const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    //   uploadTask.on('state_changed', 
+    //   (snapshot) => {
+    //     const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+    //     this.setState({progress});
+    //   }, 
+    //   (error) => {
+    //     console.log(error);
+    //   }, 
+    // () => {
+    //     storage.ref('images').child(image.name).getDownloadURL().then(url => {
+    //         console.log(url);
+    //         this.setState({url});
+    //     })
+    // });
+  }
+
 
  
   render() {
+  console.log("image",this.state.formData);
+  console.log("kk");
+  
   
     const { Industrys,msg}= this.state;
     const {Industry,firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,website, institution}= this.state.formData;
@@ -230,6 +271,12 @@ class Profile extends Component {
         <SelectSkill learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
         </label>
         </div>
+        <div className="col-2">  
+        <label className="label">image
+       < ImageUplode     handleChange={this.handleChangeImage} handleUpload={this.handleUpload}  url={this.state.url} />
+       </label>
+       </div>
+       
         <div className="p-t-15">
         <button className="btn btn--radius-2 btn--blue">
 update profile
