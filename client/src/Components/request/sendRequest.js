@@ -8,6 +8,7 @@ class Request extends Component {
     super();
     this.state = {
       responseSearch:[],
+      msg:''
     }
   
   }
@@ -23,9 +24,18 @@ class Request extends Component {
       }
     }).then(res => res.json())
     .then(response =>{
+      console.log("errr",response.err);
+      if(response.err){
+        console.log("inter");
+        
+        this.setState({msg:response.err})
+      }
+   
       this.setState({responseSearch:response})
+      console.log('Success:')
+    
 
-    console.log('Success:', JSON.stringify(response))
+   
   })
     .catch(error => console.error('Error:', error));
 
@@ -54,7 +64,7 @@ class Request extends Component {
    
     
    
-    const {responseSearch} = this.state;
+    const {responseSearch,msg} = this.state;
     
     return(<div className="main page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
 
@@ -63,6 +73,7 @@ class Request extends Component {
               <div className="card-body">
                   <h2 className="title">Mentors</h2>
                   <div className="row row-space">
+                  {responseSearch.length > 0 &&
       <div className="col-2">
         {responseSearch.map(item =>
           <span key={item.id}>
@@ -73,7 +84,10 @@ class Request extends Component {
           </span>
         )}
       </div>
+                  } 
       </div>
+      <div><p>
+ {msg} </p></div>
       </div>
       </div>
       </div>
