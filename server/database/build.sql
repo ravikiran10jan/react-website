@@ -1,8 +1,8 @@
 BEGIN;
-DROP TABLE IF EXISTS users ,CASCADE;
-DROP TYPE IF EXISTS skills_learn, skills_masterd;
-CREATE TYPE skills_learn AS ENUM ('HTML','CSS','javascript','react');
-CREATE TYPE skills_masterd AS ENUM ('PHP','node','express','java');
+DROP TABLE IF EXISTS users ,connections,CASCADE;
+DROP TYPE IF EXISTS states;
+
+CREATE TYPE states AS ENUM ('approved', 'pending', 'decline');
 
 
 
@@ -24,16 +24,30 @@ CREATE TABLE "users" (
   "skypeid" varchar(100),
   "website" varchar(100),
   "Institution_name" varchar(100),
-  "skills_learn" skills_learn ,
-  "skills_masterd" skills_masterd,
+  "skills_learn" varchar[] ,
+  "skills_masterd" varchar[],
   "industry" varchar(20),
-  "image" varchar(200) DEFAULT 'https://www.shareicon.net/data/2016/08/05/806962_user_512x512.png'
+  "image" varchar(1000) DEFAULT 'https://www.shareicon.net/data/2016/08/05/806962_user_512x512.png',
+   	CONSTRAINT users_pk PRIMARY KEY ("id")
 );
 
 
+CREATE TABLE "connections" (
+	"id" serial NOT NULL,
+	"sender_user_id" int NOT NULL,
+	"receiver_user_id" int NOT NULL,
+	"relation_state" states DEFAULT 'pending',
+	"date_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT connections_pk PRIMARY KEY ("sender_user_id", "receiver_user_id")
+);
 
 
-INSERT INTO users (first_name,last_name,email,mobile,country_code,city,position,gender,password) VALUES ('eman','kaled','eman@h.live','059','0097','gaza','palestain','female','123');
+ALTER TABLE "connections" ADD CONSTRAINT "connections_fk0" FOREIGN KEY ("sender_user_id") REFERENCES "users"("id")  ON DELETE CASCADE;
+ALTER TABLE "connections" ADD CONSTRAINT "connections_fk1" FOREIGN KEY ("receiver_user_id") REFERENCES "users"("id")  ON DELETE CASCADE;
+
+
+
+
 
 
 

@@ -16,19 +16,25 @@ const getProfileData = (id, cb) => {
 }
 
 
-const insertProfileData = ({firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,Industry ,id} , cb) => {
+
+const insertProfileData = ({firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,Industry ,url,skillsvalueInsert,skillsastervalueInsert,id} , cb) => {
+  console.log("data qyer",skillsvalueInsert);
+  
 
 
   const sql = {
-    text: 'UPDATE users SET (first_name,last_name ,email,company_name, linked_profile, skypeid,about_me,  achievement,industry) = ($1, $2, $3, $4, $5,$6,$7,$8,$9) where id= $10',
-    values: [firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,Industry ,id]
+    text: 'UPDATE users SET (first_name,last_name ,email,company_name, linked_profile, skypeid,about_me,  achievement,industry,image,skills_learn [1],skills_masterd[1]) = ($1, $2, $3, $4, $5,$6,$7,$8,$9,$10,$11,$12) where id= $13',
+    values: [firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,Industry,url,skillsvalueInsert ,skillsastervalueInsert,id]
   }
   db.query(sql, (err, result) => {
+
     if (err){
+     console.log("err in database",err);
      
       cb(err);
     } else {
      
+    
       
       cb(null, result);
     }

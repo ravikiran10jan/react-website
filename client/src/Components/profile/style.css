@@ -37,7 +37,11 @@
     width: -moz-calc((100% - 30px) / 2);
     width: calc((100% - 30px) / 2);
   }
-  
+  .col-4 {
+    width: -webkit-calc((100% - 30px));
+    width: -moz-calc((100% - 30px) );
+    width: calc((100% - 30px) );
+  }
   @media (max-width: 767px) {
     .col-2 {
       width: 100%;
@@ -111,12 +115,7 @@
     border: 0;
   }
   
-  button {
-    outline: none;
-    background: none;
-    border: none;
-  }
-  
+ 
   /* ==========================================================================
      #PAGE WRAPPER
      ========================================================================== */
@@ -360,7 +359,7 @@
   } */
   
   .input--style-4 {
-    line-height: 50px;
+    line-height: 40px;
     background: #fafafa;
     -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
     -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
@@ -483,7 +482,7 @@
   
   .input-group {
     position: relative;
-    margin-bottom: 22px;
+    margin-bottom: 15px;
   }
   
   .input-group-icon {
@@ -607,7 +606,7 @@
     font-size: 24px;
     color: #525252;
     font-weight: 400;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   
   /* ==========================================================================
@@ -631,7 +630,7 @@
   }
   
   .card-4 .card-body {
-    padding: 57px 65px;
+    padding: 20px 65px;
     padding-bottom: 65px;
   }
   

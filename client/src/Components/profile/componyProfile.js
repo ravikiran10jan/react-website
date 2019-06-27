@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import Input from './input';
 import sessionCheckError from  './../../helpers/handleAuthentication';
 import './style.css';
-
 import SelectSkill from './selectSkill';
-import SelectIndustry from './selectIndustry';
-import ImageUplode from './ImageUplode'
-
+import ImageUplode from './ImageUplode';
+import {storage} from './../../firebase/index';
+import Textarea from './textarea'
 /* eslint-disable*/
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
+
 
       formData:{
         firstName:'',
@@ -22,38 +22,53 @@ class Profile extends Component {
         skype:'',
         aboutMe: '',
         achievement:'',
-       
         selectedMasterSkill:'',
         Industry:'',
         position:'',
-        selectedLearnSkill: '',
+        selectedLearnSkill: [],
         id:'',
         website:'',
         institution:'',
-        image: null,
+        url: '',
+        
       },
-
-      
-      url: '',
+      image: null,
+    
       progress: 0,
-     
-     
+ 
      learnSkill : [
-        { label: "Apple", value: 1 },
-        { label: "Facebook", value: 2 },
-        { label: "Netflix", value: 3 },
-        { label: "Tesla", value: 4 },
-        { label: "Amazon", value: 5 },
-        { label: "Alphabet", value: 6 },
+        { label: "Blockchain", value: 1 },
+        { label: "Machine Learning", value: 2 },
+        { label: "core Java", value: 3 },
+        { label: "Spring", value: 4 },
+        { label: "Hibernate", value: 5 },
+        { label: "Rest", value: 6 },
+        { label: "React", value: 7 },
+        { label: "Angular", value: 8 },
+        { label: "Spell Bee", value: 9 },
+        { label: "Olympiad", value: 10},
+        { label: "Board Exam", value: 11 },
+        { label: "SOP preparation", value: 12 },
+        { label: "Assignment", value: 13 },
+        { label: "Project", value: 14},
       ],
+   
      masterSkill : [
-        { label: "java", value: 1 },
-        { label: "css", value: 2 },
-        { label: "php", value: 3 },
-        { label: "node", value: 4 },
-        { label: "python", value: 5 },
-        { label: "express", value: 6 },
-      ],
+      { label: "Blockchain", value: 1 },
+      { label: "Machine Learning", value: 2 },
+      { label: "core Java", value: 3 },
+      { label: "Spring", value: 4 },
+      { label: "Hibernate", value: 5 },
+      { label: "Rest", value: 6 },
+      { label: "React", value: 7},
+      { label: "Angular", value: 8 },
+      { label: "Spell Bee", value: 9 },
+      { label: "Olympiad", value: 10},
+      { label: "Board Exam", value: 11 },
+      { label: "SOP preparation", value: 12 },
+      { label: "Assignment", value: 13 },
+      { label: "Project", value: 14 },
+    ],
   
       Industrys: ['A', 'B', 'C', 'D'],
       msg:''
@@ -62,23 +77,20 @@ class Profile extends Component {
      
     };
 
-    this.handleChangeImage = this
-    .handleChangeImage
-    .bind(this);
-    this.handleUpload = this.handleUpload.bind(this);
+
  
   }
 
   componentDidMount() {
     const id = sessionCheckError(sessionStorage.getItem('token')).id;
-  
-    
     fetch(`api/profile?id=${id}`, {
       credentials: 'same-origin',
       method: 'GET',
     }).then(res=>res.json())
       .then((res) => {
-        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,skills_learn,skills_masterd,industry,Institution_name,website,position,id
+      
+        
+        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,skills_learn ,skills_masterd,industry,Institution_name,website,position,id
           } = res[0]
 
         this.setState({
@@ -95,7 +107,8 @@ class Profile extends Component {
             Industry:industry,
             id:id,
             website:website,
-            institution:Institution_name
+            institution:Institution_name,
+          
           }
         })
        
@@ -116,13 +129,31 @@ class Profile extends Component {
     });
   }
   handleChangeImage = e => {
-    console.log("arive");
-    
     if (e.target.files[0]) {
       const image = e.target.files[0];
-      // const img = this.state.formData.image;
-      this.setState({formData :{image}});
+      this.setState(() => ({image}));
     }
+  }
+  handleUploadImage = () => {
+      const {image} = this.state;
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on('state_changed', 
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        this.setState({progress});
+      }, 
+      (error) => {
+        console.log(error);
+      }, 
+    () => {
+        storage.ref('images').child(image.name).getDownloadURL().then(url => {
+          this.setState(prevState => {
+            let formData = Object.assign({}, prevState.formData);  
+            formData.url = url;                                     
+            return {formData};                            
+          })
+        })
+    });
   }
 
   handleSubmit = (e) => {
@@ -141,7 +172,10 @@ class Profile extends Component {
         if (res.err) {
           this.setState({msg: 'Some error happened, please try save the data again'});
         }
+        else{
+         
         this.setState({msg: 'Your profile has been updated'});
+        }
       })
       .catch((err) => {
         console.log('Error', 'Some error happened, please try save the data again');
@@ -152,53 +186,36 @@ class Profile extends Component {
   handleChangeLearnSkill = selectedLearnSkill => {
  
     this.setState((prevState) => {
-      const formData = JSON.parse(JSON.stringify(prevState.formData));
-            formData[selectedLearnSkill]  = selectedLearnSkill ;
-            return { formData };
-     });
+      let formData = Object.assign({}, prevState.formData);  
+       formData.selectedLearnSkill= selectedLearnSkill;                       
+       return {formData};
+       });
+  
     }
 
   handleChangeMasterSkill = selectedMasterSkill => {
     this.setState((prevState) => {
-      const formData = JSON.parse(JSON.stringify(prevState.formData));
-            formData[selectedMasterSkill] = selectedMasterSkill;
-            return { formData };
+    let formData = Object.assign({}, prevState.formData);  
+     formData.selectedMasterSkill= selectedMasterSkill;                     
+     return {formData};
      });
   };
-
-  handleUpload = () => {
-    const {image} = this.state;
-    console.log("eman",this.state.formData.image);
-    //       const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    //   uploadTask.on('state_changed', 
-    //   (snapshot) => {
-    //     const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-    //     this.setState({progress});
-    //   }, 
-    //   (error) => {
-    //     console.log(error);
-    //   }, 
-    // () => {
-    //     storage.ref('images').child(image.name).getDownloadURL().then(url => {
-    //         console.log(url);
-    //         this.setState({url});
-    //     })
-    // });
-  }
 
 
  
   render() {
-  console.log("image",this.state.formData);
-  console.log("kk");
+
   
-  
+
+    
+   
+    
     const { Industrys,msg}= this.state;
     const {Industry,firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,website, institution}= this.state.formData;
    
 
     return (
-      <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+      <div className=" main page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
       <div className="wrapper wrapper--w680">
             <div className="card card-4">
                 <div className="card-body">
@@ -234,47 +251,39 @@ class Profile extends Component {
         </div>
         <div className="col-2">
         <div className="input-group">
-        <label className="label"> Industry
+        
+        <label className="label"> Industry </label>
         <select className="input--style-4" name="Industry" id="Industry" value={Industry? Industry:"no-value"} onChange={this.handleChange} >
             <option disabled value="no-value">Select a Industry</option>
             {Industrys.map(Industry => {
               return <option key={Industry} value={Industry.toUpperCase()}>{Industry}</option>
             })}
           </select>
-          </label>
+         
           </div>
           </div>
-        <div className="col-2">
-        <div className="input-group">
-        <label className="label">
-          About me 
-          <textarea className="input--style-4" value={aboutMe} onChange={this.handleChange} name="aboutMe" placeholder="please write about you 500 words"/>
-        </label>
+        <div className="col-2"> 
+        <Textarea label='About me' value={aboutMe} handleChange={this.handleChange}
+        name="aboutMe" placeholder="please write about you 500 words" />
         </div>
-        </div>
-        <div className="col-2">
-        <div className="input-group">
-        <label className="label">
-          achievement 
-          <textarea className="input--style-4" value={achievement} onChange={this.handleChange} name="achievement" placeholder="please write achievement 400 words"/>
-        </label>
-        </div>
+        <div className="col-2"> 
+        <Textarea label=' achievement' value={achievement} handleChange={this.handleChange}
+        name="achievement" placeholder="please write achievement 400 words" />
         </div>
         <div className="col-2">
         
-        <label className="label">skill to learn
-        <SelectSkill learnSkill ={this.state.learnSkill}  onChangeSelect={this.handleChangeLearnSkill} valueSelect={this.state.formData.selectedLearnSkill} />
-        </label>
+       
+        <SelectSkill label='skill to learn' learnSkill ={this.state.learnSkill}  onChangeSelect={this.handleChangeLearnSkill} valueSelect={this.state.formData.selectedLearnSkill} />
+     
         </div>
         <div className="col-2">  
-        <label className="label">master to learn
-        <SelectSkill learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
-        </label>
+      
+        <SelectSkill  label ='master to learn' learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
+    
         </div>
-        <div className="col-2">  
-        <label className="label">image
-       < ImageUplode     handleChange={this.handleChangeImage} handleUpload={this.handleUpload}  url={this.state.url} />
-       </label>
+        <div className="col-4">  
+       < ImageUplode    label='image' handleChangeImage={this.handleChangeImage } handleUploadImage={this. handleUploadImage }  url={this.state.formData.url} progress={this.state.progress}/>
+      
        </div>
        
         <div className="p-t-15">

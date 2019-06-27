@@ -6,17 +6,93 @@ import handleAuthentication from './helpers/handleAuthentication';
 import './App.css';
 import Login from './Components/login/login';
 import Signup from './Components/signUp/signup';
-import Home from './Components/home/index';
 import Profile from './Components/profile/componyProfile'
+import Search from './Components/search/search';
+import Nav from './Components/nav/index';
+import Request from './Components/request/sendRequest'
 
     const token = sessionStorage.getItem('token');
+
+    
     class AppRoutes extends Component {
         state = {
-          response: [],
+          response: {
+            id:'',
+            imageProfile: null,
+            first_name:'', 
+            last_name:'',
+
+          },
+          responseAddFrined: [],
         }
+      
+  
+       
+
+        componentDidMount(){
+          const {id} = handleAuthentication(sessionStorage.getItem('token'));
+  
+
+        fetch('/api/detailes', {
+          method:'POST',
+          body: JSON.stringify(handleAuthentication(token)),
+          headers: {'Content-Type': 'application/json'}
+        })
+              .then(res => res.json())
+              .then(response => {                
+                const {id,image,first_name, 
+                  last_name,
+                } = response[0]
+                this.setState(
+                  {
+                    response:{
+                      id,
+                      imageProfile:image,
+                      first_name, 
+                      last_name,
+                  }
+                }
+                )
+              })
+             
+              .catch (error => console.log("error fetch notification", error))
+
+    
+                fetch(`/api/notification?id=${id}`, {
+                method:'POST',
+                // body: JSON.stringify(),
+                headers: {'Content-Type': 'application/json'}
+              })
+                    .then(res => res.json())
+                    .then(response => {
+                      console.log('when add me',response);
+                      this.setState(
+                        {
+                          
+                          
+                          responseAddFrined: Object.assign([], response)
+                        }
+                      )
+  
+                      
+                    })
+                    .catch (error => console.log("error fetch notification", error))
+                  }
+                  handleNotificationResponse = (deletedNotiId) => {
+                    this.setState(
+                      {
+                        responseAddFrined: this.state.responseAddFrined.filter((noti) => noti.id !== deletedNotiId)
+                      }
+                    )
+                  }
+
 
 
         render(){
+         
+          
+          
+        
           const PrivateRoute = ({ component: Component }) => (
             <Route
               render={props => (
@@ -27,11 +103,25 @@ import Profile from './Components/profile/componyProfile'
           );
                 return(
                   <div className="AppRoutes">
+                 
 
                     <BrowserRouter>
+                    {/* <Route path={/[^/login]/} render={() =>
+                     <Nav detailes= {this.state.response} />
+                    }/> */}
+
                     <div>
-                      <Switch>
+                      <Switch>/}
                         <Route
+                          path="/login"
+                          render={props => (handleAuthentication(token).status ? <Redirect to="/" />
+                            : <Login {...props} handleAuthentication={handleAuthentication} />)}
+                        />
+                        <Route path="/signup" render={props => (handleAuthentication(token).status ?
+                        <Redirect to="/" />
+                          : <Signup {...props} handleAuthentication={handleAuthentication} />)} />
+    
+                         <Route
                           path="/"
                           render={props => (handleAuthentication(token).status
                             ? <Profile {...props} token={token} userId={handleAuthentication} />
@@ -40,17 +130,14 @@ import Profile from './Components/profile/componyProfile'
                           }
                           exact
                         />
-                        <Route
-                          path="/login"
-                          render={props => (handleAuthentication(token).status ? <Redirect to="/" />
-                            : <Login {...props} handleAuthentication={handleAuthentication} />)}
-                        />
-                        <Route path="/signUp" render={props => (handleAuthentication(token).status ?
-                        <Redirect to="/" />
-                          : <Signup {...props} handleAuthentication={handleAuthentication} />)} />
+                          <PrivateRoute path="/search" component={Search} />
+
+                          <PrivateRoute path="/requests" component={Request} />
 
                       </Switch>
-                        </div>
+                      </div>
+                      <Nav  handleNotificationResponse={this.handleNotificationResponse} response={this.state.responseAddFrined} detailes= {this.state.response} />
+                       
                     </BrowserRouter>
 
                   </div>

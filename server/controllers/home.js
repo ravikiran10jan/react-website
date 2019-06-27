@@ -9,8 +9,7 @@ exports.post = (req, res) => {
     res.send({error})  
     }
     else{
-    
-      console.log("resul",{result});
+  
       
  res.send({result})
     }

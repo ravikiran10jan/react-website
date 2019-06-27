@@ -1,0 +1,39 @@
+.notification-wrapper {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 300px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 7px;
+}
+
+.notification-wrapper div {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+}
+
+.notification-wrapper p {
+  width: 80%;
+  text-align: center;
+}
+
+.notification-wrapper button {
+  cursor: pointer;
+  width: 90px;
+  height: 35px;
+  text-align: center;
+  border-radius: 18px;
+  background-color: #48A1AF;
+  border: none;
+}
+
+.notification-wrapper button:hover {
+  box-shadow: 0 2px 5px -2px #000;
+}
+
+.notification-wrapper button:nth-child(2) {
+  background-color: #848484;
+}

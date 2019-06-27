@@ -70,7 +70,7 @@ handleInputChange = (e) => {
 render(){
   
   return(
-    <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div className="  main page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div className="wrapper wrapper--w680">
           <div className="card card-4">
               <div className="card-body">
