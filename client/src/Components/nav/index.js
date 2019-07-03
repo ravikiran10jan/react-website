@@ -71,11 +71,7 @@ class Nav extends Component {
         txt: 'Contact Us',
         link: '/contact',
       },
-      // {
-      //   id:3,
-      //   txt: 'Logout',
-      //   link: '/logout',
-      // },
+    
      
     ]
     return (

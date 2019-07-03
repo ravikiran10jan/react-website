@@ -31,3 +31,16 @@
     transform: rotate(360deg);
   }
 } */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  margin-top: 35px;
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 20px 10px;
+}
+
+
+@media (max-width: 767px) {
+  .main{
+    margin-left: 0px;
+  }
+}

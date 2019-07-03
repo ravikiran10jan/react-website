@@ -15,10 +15,20 @@ class Request extends Component {
 
 
   componentDidMount(){
+    // const id = sessionCheckError(sessionStorage.getItem('token')).id;
+    // console.log("id in did mount",id);
+    const data ={
+      id:sessionCheckError(sessionStorage.getItem('token')).id,
+      search:this.props.location.state.data
+
+    }
+    console.log("datasss search",data.search);
+    
     const url ='/api/search';
     fetch(url, {
       method: 'POST', 
-      body: JSON.stringify({data:this.props.location.state.data}), 
+      body: JSON.stringify({ id:sessionCheckError(sessionStorage.getItem('token')).id,
+      search:this.props.location.state.data}), 
       headers:{
         'Content-Type': 'application/json'
       }

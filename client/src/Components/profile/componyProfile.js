@@ -6,7 +6,7 @@ import SelectSkill from './selectSkill';
 import ImageUplode from './ImageUplode';
 import {storage} from './../../firebase/index';
 import Textarea from './textarea'
-/* eslint-disable*/
+
 class Profile extends Component {
   constructor() {
     super();
@@ -90,7 +90,7 @@ class Profile extends Component {
       .then((res) => {
       
         
-        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,skills_learn ,skills_masterd,industry,Institution_name,website,position,id
+        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,industry,Institution_name,website,position,id
           } = res[0]
 
         this.setState({
@@ -278,11 +278,11 @@ class Profile extends Component {
         </div>
         <div className="col-2">  
       
-        <SelectSkill  label ='master to learn' learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
+        <SelectSkill label ='master to learn' learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
     
         </div>
         <div className="col-4">  
-       < ImageUplode    label='image' handleChangeImage={this.handleChangeImage } handleUploadImage={this. handleUploadImage }  url={this.state.formData.url} progress={this.state.progress}/>
+       <ImageUplode label='image' handleChangeImage={this.handleChangeImage } handleUploadImage={this.handleUploadImage}  url={this.state.formData.url} progress={this.state.progress}/>
       
        </div>
        

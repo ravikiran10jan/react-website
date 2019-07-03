@@ -30,6 +30,8 @@ import Request from './Components/request/sendRequest'
        
 
         componentDidMount(){
+
+console.log("h",handleAuthentication(token).status);
           const {id} = handleAuthentication(sessionStorage.getItem('token'));
   
 
@@ -60,16 +62,13 @@ import Request from './Components/request/sendRequest'
     
                 fetch(`/api/notification?id=${id}`, {
                 method:'POST',
-                // body: JSON.stringify(),
                 headers: {'Content-Type': 'application/json'}
               })
                     .then(res => res.json())
                     .then(response => {
-                      console.log('when add me',response);
+                  
                       this.setState(
                         {
-                          
-                          
                           responseAddFrined: Object.assign([], response)
                         }
                       )
@@ -133,11 +132,18 @@ import Request from './Components/request/sendRequest'
                           <PrivateRoute path="/search" component={Search} />
 
                           <PrivateRoute path="/requests" component={Request} />
+                            {/* <Route render={props => (handleAuthentication(token).status ?
+                            <Nav  handleNotificationResponse={this.handleNotificationResponse} response={this.state.responseAddFrined} detailes= {this.state.response} />: null
+                            )}
+                   /> */}
 
                       </Switch>
                       </div>
+                      {handleAuthentication(token).status && 
                       <Nav  handleNotificationResponse={this.handleNotificationResponse} response={this.state.responseAddFrined} detailes= {this.state.response} />
+                      }
                        
+                
                     </BrowserRouter>
 
                   </div>
