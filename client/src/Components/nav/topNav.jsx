@@ -1,54 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-
 import { NavLink } from 'react-router-dom';
 
 
-
-
 class Header extends Component {
-
-
-  render(){
-
-   
-    
+  render() {
     const handleActive = (match) => {
-      if(match && match.isExact){
+      if (match && match.isExact) {
         return true;
-      } else {
-        return false;
       }
-    }
+      return false;
+    };
     const {
       link,
       txt,
-  
-    
+
+
     } = this.props;
 
-   
-    return(
-    
+
+    return (
+      <NavLink to={link} isActive={handleActive} activeClassName="active">
+        <button className="navbarbutton" type="button">
+          {txt}
+        </button>
+      </NavLink>
 
 
-
-        <NavLink to={link} isActive={handleActive} activeClassName="active">
-      
-      
-      <button className = 'navbarbutton' type = "button">
-       {txt}
-
-      </button>
-   
-    </NavLink>
-
- 
     );
   }
 }
-
 
 
 Header.propTypes = {

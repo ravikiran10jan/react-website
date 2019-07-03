@@ -45,7 +45,7 @@ handleInputChange = (e) => {
      .then(response => response.json())
      .then(response => {
       sessionStorage.setItem('token', response.token);
-      console.log("token",response.token);
+     
       
       this.setState(() => (
         {
@@ -70,7 +70,7 @@ handleInputChange = (e) => {
 render(){
   
   return(
-    <div className="  main page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div className="wrapper wrapper--w680">
           <div className="card card-4">
               <div className="card-body">

@@ -8,8 +8,8 @@
 
 }
 .sidenav h2{
-  padding-top: 10px;
-  color: #f2f2f2;
+  /* padding-top: 10px; */
+  color: rgba(0,0,0,.87);
   padding-left: 10px;
 }
 .sidenav image{
@@ -17,12 +17,12 @@
 }
 .sidenav {
   height: 100%;
-  width: 240px;
+  width: 20ss0px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #1b1a1a ;
+  background-color: #f5f5f5 ;
   /* overflow-x: hidden; */
   padding-top: 50px;
 }
@@ -32,29 +32,34 @@
   padding-bottom: 13px;
   text-decoration: none;
   font-size: 20px;
-  color: #f2f2f2;
+  color:rgba(0,0,0,.87);
   display: block;
-  border: .5px solid #818181;
-  width: 240px;
+  
+  width: 200px;
  text-align: left;
  text-decoration: none;
  padding-left: 10px;
+ border: .5px solid #aba0a07d;
+ border-top: none;
 }
 a {
   text-decoration: none;
 }
 
 .active button  {
-  background-color: #818181;
-  color: #111
+  /* background-color: #818181; */
+  color: #6c4079;
+  border-bottom: 2px solid #6c4079;
+  font-size: 22px;
+  transition: all .60s ease-in;
+
+  /* background: -webkit-gradient(linear, left bottom, right top, from(#fc2c77), to(#6c4079));
+  background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
+  background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
+  background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
+  background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%); */
 }
 
-.main {
-  margin-left: 220px; /* Same as the width of the sidenav */
-  margin-top: 40px;
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 20px 10px;
-}
 
 .navbar-logo img
 {
@@ -65,11 +70,11 @@ border-radius: 50px;
 }
 .navbar {
   /* overflow: hidden; */
-  background-color: #1b1a1a;
+  background-color: #f5f5f5;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
-  height:40px;
+  height:35px;
   z-index: 1;
   
 }
@@ -77,17 +82,24 @@ border-radius: 50px;
 .navbarbutton{
   float: right;
   display: block;
-  color: #f2f2f2;
+  color: rgba(0,0,0,.87);
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 10px;
   text-decoration: none;
   /* position: relative; */
   z-index: 1;
-  height:40px;
+  height:35px;
 }
 
 
 .flex-container {
   display: flex;
   flex-wrap: nowrap;
+}
+
+
+@media (max-width: 767px) {
+  .sidenav{
+    display: none;
+  }
 }
