@@ -4,6 +4,7 @@ import Header from './topNav';
 import Notifications from './Notifications';
 import { NavLink } from 'react-router-dom';
 
+
 import './style.css';
 
 class Nav extends Component {
@@ -94,6 +95,11 @@ class Nav extends Component {
       <div className ="flex-container">
      
       <div className="navbar">
+     
+
+    
+
+
      
        {urlListTopNav.map(item =>
         <span key={item.id}>

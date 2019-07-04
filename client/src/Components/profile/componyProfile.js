@@ -133,6 +133,8 @@ class Profile extends Component {
       const image = e.target.files[0];
       this.setState(() => ({image}));
     }
+
+ 
   }
   handleUploadImage = () => {
       const {image} = this.state;

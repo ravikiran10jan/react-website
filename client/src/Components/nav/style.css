@@ -34,7 +34,7 @@
   font-size: 20px;
   color:rgba(0,0,0,.87);
   display: block;
-  
+  cursor: pointer;
   width: 200px;
  text-align: left;
  text-decoration: none;
@@ -45,13 +45,16 @@
 a {
   text-decoration: none;
 }
+a:hover {
+  color: #6c4079;
+}
 
 .active button  {
   /* background-color: #818181; */
   color: #6c4079;
   border-bottom: 2px solid #6c4079;
-  font-size: 22px;
-  transition: all .60s ease-in;
+  font-size: 20px;
+  transition: all .40s ease-in;
 
   /* background: -webkit-gradient(linear, left bottom, right top, from(#fc2c77), to(#6c4079));
   background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
@@ -74,8 +77,9 @@ border-radius: 50px;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
-  height:35px;
+  height:38px;
   z-index: 1;
+  left:0;
   
 }
 
@@ -88,7 +92,15 @@ border-radius: 50px;
   text-decoration: none;
   /* position: relative; */
   z-index: 1;
-  height:35px;
+  height:38px;
+  cursor: pointer
+}
+.navbarbutton:hover{
+  color: #6c4079;
+  font-size: 15px;
+}
+.sidenavbutton:hover{
+  color: #6c4079;
 }
 
 
