@@ -52,11 +52,6 @@ class Nav extends Component {
       },
       {
         id:5,
-        txt: 'Logout',
-        link: '/logout',
-      },
-      {
-        id:6,
         txt: 'Contact Us',
         link: '/contact',
       },
@@ -89,6 +84,17 @@ class Nav extends Component {
             </NavElement>
           </span>
         )}
+                <NavLink to='/logout' isActive={handleActive} activeClassName="active">
+       <span> 
+
+           <button className="sidenavbutton" type="button" onClick={()=> {
+            sessionStorage.setItem("token", "");
+            window.location ='/login';
+          }} name="logout" >
+         Logout
+        </button>
+     </span>
+     </NavLink>
 
        
       </div>
@@ -97,8 +103,8 @@ class Nav extends Component {
       <div className="navbar">
      
 
-    
 
+    
 
      
        {urlListTopNav.map(item =>
@@ -115,16 +121,21 @@ class Nav extends Component {
           }} name="logout" >logout</div>
      </span>
      </NavLink>
-
-       <span> <div className='navbarbutton notificationsStyle'> <Notifications handleNotificationResponse={this.props.handleNotificationResponse} response={this.props.response} />
+     <span> <div className='navbarbutton notificationsStyle'> <Notifications handleNotificationResponse={this.props.handleNotificationResponse} response={this.props.response} />
       </div>
 
      </span>
+    
+    
+
+
+     
      
    
       </div>
+    
       </div>
- 
+    
 
       </div>
     );

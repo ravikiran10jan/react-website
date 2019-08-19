@@ -17,10 +17,13 @@ export default class NavElement extends React.Component {
       txt,
 
     } = this.props;
+    console.log('log', link);
+
 
     return (
 
       <NavLink to={link} isActive={handleActive} activeClassName="active">
+
         <button className="sidenavbutton" type="button">
           {txt}
         </button>

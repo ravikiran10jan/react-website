@@ -17,7 +17,7 @@
 }
 .sidenav {
   height: 100%;
-  width: 20ss0px;
+  width: 200px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -80,6 +80,7 @@ border-radius: 50px;
   height:38px;
   z-index: 1;
   left:0;
+  padding-right: 30px;
   
 }
 
@@ -90,7 +91,7 @@ border-radius: 50px;
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  /* position: relative; */
+  position: relative;
   z-index: 1;
   height:38px;
   cursor: pointer

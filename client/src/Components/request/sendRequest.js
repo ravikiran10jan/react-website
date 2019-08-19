@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import sessionCheckError from  './../../helpers/handleAuthentication';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import FontAwesomeIcon from 'react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faUserPlus} from '@fortawesome/free-solid-svg-icons'
+
+
+import './style.css'
 
 
 
@@ -84,17 +91,36 @@ class Request extends Component {
                   <h2 className="title">Mentors</h2>
                   <div className="row row-space">
                   {responseSearch.length > 0 &&
-      <div className="col-2">
+      <div className="column">
         {responseSearch.map(item =>
-          <span key={item.id}>
-            <h1> {item.first_name} {item.last_name}</h1>
+          // <span key={item.id}>
+          <div className="card-info" key={item.id}>
+          <div>
+            <h1>{item.first_name} {item.last_name}</h1>
             <p>{item.about_me}</p>
-            <button className="btn btn--radius-2 btn--blue" id={item.id} onClick={this.sendRequest}>add
-            </button>
-          </span>
+          
+            {/* <FontAwesomeIcon
+        className='fas fa-user-plus'
+        name='rocket'
+        size='2x'
+        spin
+        style={{color:'red', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      /> */}
+            </div>
+            <div>
+     
+            <button className="btn--add btn--radius-2 btn--blue" id={item.id} onClick={this.sendRequest}>  <FontAwesomeIcon icon={faUserPlus} />                                                                                                                                                                                                                                                                                                                                                                               
+             </button>
+     
+            </div>
+            </div>
+          // </span>
         )}
       </div>
+     
                   } 
+                   {/* <FontAwesomeIcon ><i class="fas fa-user-plus"></i></FontAwesomeIcon>
+                   <FontAwesomeIcon icon={faUserPlus} /> */}
       </div>
       <div><p>
  {msg} </p></div>
@@ -105,5 +131,8 @@ class Request extends Component {
     )
   }
 
+  // <div class="row">
+  // <div class="column">
+  //   <div class="card">
 }
 export default Request;
