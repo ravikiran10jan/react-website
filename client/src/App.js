@@ -9,7 +9,9 @@ import Signup from './Components/signUp/signup';
 import Profile from './Components/profile/componyProfile'
 import Search from './Components/search/search';
 import Nav from './Components/nav/index';
-import Request from './Components/request/sendRequest'
+import Request from './Components/request/sendRequest';
+// import Toolbar from './Components/Toolbar/Toolbar'
+
 
     const token = sessionStorage.getItem('token');
 
@@ -91,7 +93,7 @@ console.log("h",handleAuthentication(token).status);
          
           
           
-        
+      
           const PrivateRoute = ({ component: Component }) => (
             <Route
               render={props => (
@@ -142,7 +144,7 @@ console.log("h",handleAuthentication(token).status);
                       {handleAuthentication(token).status && 
                       <Nav  handleNotificationResponse={this.handleNotificationResponse} response={this.state.responseAddFrined} detailes= {this.state.response} />
                       }
-                       
+                     
                 
                     </BrowserRouter>
 

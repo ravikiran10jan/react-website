@@ -7,11 +7,16 @@ const ImageUpload = ({
     <label className="label">{label}</label>
     <progress value={progress} max="100" />
     <br />
-    <input className="input--style-4" type="file" onChange={handleChangeImage} />
-    {/* <button className="btn-uplodeImg " onClick={handleUploadImage}>Upload</button> */}
+    <input
+      className="input--style-4"
+      type="file"
+      onChange={handleChangeImage}
+    />
+    <input type="submit" className="btn-uplodeImg " onClick={handleUploadImage} value="Uplode" />
     <br />
   </div>
 );
 
 
 export default ImageUpload;
+//  onKeyUp={handleUploadImage}

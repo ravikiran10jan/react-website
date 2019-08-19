@@ -640,3 +640,8 @@
       padding: 50px 40px;
     }
   }
+  .flex-container-login{
+    display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  }

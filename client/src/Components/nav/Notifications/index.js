@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import FontAwesomeIcon from 'react-fontawesome'
 import Notification from './Notification/Notification';
 import './style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBell} from '@fortawesome/free-solid-svg-icons'
+
 
 class Notifications extends Component {
   state = {
@@ -55,7 +57,7 @@ class Notifications extends Component {
         <a   onClick={this.toggleNotification} className="notification">
           <div>
             {(response.length && !show)?<span className="num">{response.length}</span>:''}
-            <FontAwesomeIcon name="bell-o" />notification
+            <FontAwesomeIcon icon={faBell} />
           </div>
         </a>
         <div className={`notifications ${show?'': "hidden"}`}>

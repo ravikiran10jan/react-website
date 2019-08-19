@@ -17,6 +17,8 @@ const getProfile = (req, res) => {
 };
 
 const postProfile = (req, res) => {
+  console.log('g', req.body.url);
+
   const { id } = req.query;
   const {
     firstName, lastName, email, Company, linkedin, skype, aboutMe, achievement, Industry, selectedLearnSkill, selectedMasterSkill, url,
