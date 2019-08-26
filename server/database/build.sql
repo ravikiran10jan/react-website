@@ -23,7 +23,7 @@ CREATE TABLE "users" (
   "about_me" varchar(300),
   "skypeid" varchar(100),
   "website" varchar(100),
-  "Institution_name" varchar(100),
+  "institution_name" varchar(100),
   "skills_learn" varchar[] ,
   "skills_masterd" varchar[],
   "industry" varchar(20),

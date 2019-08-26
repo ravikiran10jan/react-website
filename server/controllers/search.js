@@ -1,7 +1,6 @@
 const { getSearchResult } = require('./../database/queries/select_search');
 
 exports.post = (req, res) => {
-  console.log('ss', req.body);
   const { label } = req.body.search.value1;
   const { id } = req.body;
 

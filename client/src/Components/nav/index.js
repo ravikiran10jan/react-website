@@ -52,6 +52,11 @@ class Nav extends Component {
       },
       {
         id:5,
+        txt: 'Upload Image',
+        link: '/upload',
+      },
+      {
+        id:6,
         txt: 'Contact Us',
         link: '/contact',
       },
@@ -87,7 +92,7 @@ class Nav extends Component {
                 <NavLink to='/logout' isActive={handleActive} activeClassName="active">
        <span> 
 
-           <button className="sidenavbutton" type="button" onClick={()=> {
+           <button className="sidenavbutton button" type="button" onClick={()=> {
             sessionStorage.setItem("token", "");
             window.location ='/login';
           }} name="logout" >

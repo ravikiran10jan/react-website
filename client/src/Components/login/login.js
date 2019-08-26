@@ -91,11 +91,11 @@ render(){
     </div>
     </div>
     <div className="p-t-15">
-            <button className="btn btn--radius-2 btn--blue ">Sign In</button>
+            <button className="btn btn--radius-2 btn--color ">Sign In</button>
     </div>        
     </form>
     <div className="p-t-15">
-    <Link to=  "/signup"><button className="btn btn--radius-2 btn--blue">sign up</button></Link>
+    <Link to=  "/signup"><button className="btn btn--radius-2 btn--color">sign up</button></Link>
     </div>
     {this.state.error &&  <div className="login-error-msg">
     { <h3>{this.state.error}</h3>}

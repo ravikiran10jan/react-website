@@ -21,7 +21,7 @@ class Header extends Component {
 
     return (
       <NavLink to={link} isActive={handleActive} activeClassName="active">
-        <button className="navbarbutton" type="button">
+        <button className="navbarbutton button" type="button">
           {txt}
         </button>
       </NavLink>

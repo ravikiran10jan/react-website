@@ -10,7 +10,7 @@ import Profile from './Components/profile/componyProfile'
 import Search from './Components/search/search';
 import Nav from './Components/nav/index';
 import Request from './Components/request/sendRequest';
-// import Toolbar from './Components/Toolbar/Toolbar'
+import UplodeImg from './Components/uplodeImg/index'
 
 
     const token = sessionStorage.getItem('token');
@@ -134,6 +134,8 @@ console.log("h",handleAuthentication(token).status);
                           <PrivateRoute path="/search" component={Search} />
 
                           <PrivateRoute path="/requests" component={Request} />
+                        
+                          <PrivateRoute path="/upload" component={UplodeImg} />
                             {/* <Route render={props => (handleAuthentication(token).status ?
                             <Nav  handleNotificationResponse={this.handleNotificationResponse} response={this.state.responseAddFrined} detailes= {this.state.response} />: null
                             )}
