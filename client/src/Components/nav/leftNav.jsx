@@ -24,7 +24,7 @@ export default class NavElement extends React.Component {
 
       <NavLink to={link} isActive={handleActive} activeClassName="active">
 
-        <button className="sidenavbutton" type="button">
+        <button className="sidenavbutton button" type="button">
           {txt}
         </button>
       </NavLink>

@@ -146,7 +146,7 @@ class Signup extends Component {
 
                 </div>
                 <div className="p-t-15">
-                  <button className="btn btn--radius-2 btn--blue">
+                  <button className="btn btn--radius-2 btn--color">
 Sign Up
                   </button>
                 </div>

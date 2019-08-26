@@ -17,12 +17,14 @@ const getProfile = (req, res) => {
 };
 
 const postProfile = (req, res) => {
-  console.log('g', req.body.url);
+  console.log('what arrive back', req.body);
 
   const { id } = req.query;
   const {
-    firstName, lastName, email, Company, linkedin, skype, aboutMe, achievement, Industry, selectedLearnSkill, selectedMasterSkill, url,
+    firstName, lastName, email, Company, linkedin, skype, aboutMe, achievement, Industry,
+    website, institutionName, selectedLearnSkill, selectedMasterSkill,
   } = req.body;
+
 
   const skillsvalueInsert = [];
 
@@ -36,12 +38,14 @@ const postProfile = (req, res) => {
 
 
   insertProfileData({
-    firstName, lastName, email, Company, linkedin, skype, aboutMe, achievement, Industry, skillsvalueInsert, skillsastervalueInsert, url, id,
+    firstName, lastName, email, Company, linkedin, skype, aboutMe, achievement, Industry, website, institutionName, skillsvalueInsert, skillsastervalueInsert, id,
   }, (err, result) => {
     if (err) {
       res.send({ err: 'Something went wrong' });
     } else {
-      res.send({ msg: 'profile has been updated' });
+      console.log('all result insert', result);
+
+      res.send({ msg: 'profile has been updated', result });
     }
   });
 };

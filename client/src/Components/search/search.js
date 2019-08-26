@@ -11,7 +11,7 @@ class Search extends Component {
       data:{
         
         value1:null,
-        value2:null,
+     
       
       },
       learnSkill : [
@@ -30,6 +30,8 @@ class Search extends Component {
         { label: "Assignment", value: 13 },
         { label: "Project", value: 14},
       ],
+  
+     
      
     
     }
@@ -48,7 +50,7 @@ render(){
  
 
   
- const  {value1,value2} = this.state.data;
+ const  {value1} = this.state.data;
  const {data} = this.state;
  const { learnSkill }= this.state;
   return(
@@ -59,16 +61,16 @@ render(){
                 <div className="card-body">
                     <h2 className="title">Search</h2>
                     <div className="row row-space">
-        <div className="col-2">
-<SelectSearch label='skills' options={ learnSkill } valueSelect={value1} onChangeSearch={this.onChangeSearch} 
+        <div className="col-4">
+<SelectSearch label='skills learned' options={ learnSkill } valueSelect={value1} onChangeSearch={this.onChangeSearch} 
 name='value1'/>
 </div>
-<div className="col-2">
-<SelectSearch label='skills' options={ learnSkill } valueSelect={value2} onChangeSearch={this.onChangeSearch} name='value2'/>
-</div>
+{/* <div className="col-2">
+<SelectSearch label='skills mastered' options={ learnSkill } valueSelect={value2} onChangeSearch={this.onChangeSearch} name='value2'/>
+</div> */}
 
  <div className="p-t-15">
-            <Link className="btn btn--radius-2 btn--blue" 
+            <Link className="btn btn--radius-2 btn--color" 
                   to={{
                     pathname: '/requests',
                     state: {

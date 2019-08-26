@@ -12,7 +12,7 @@ const { postProfile, getProfile } = require('./profile.js');
 const getSearchMentor = require('./search.js');
 const detailes = require('./detailes.js');
 const { postFrined } = require('./request.js');
-const eman = require('./eman');
+const upload = require('./uploadImage');
 
 
 router.post('/api/signup', signup.post);
@@ -23,7 +23,7 @@ router.put('/api/profile', postProfile);
 router.post('/api/detailes', detailes.post);
 
 router.post('/api/requests', postFrined);
-router.post('/api/eman', eman.post);
+router.post('/api/upload', upload.post);
 router.post('/api/notification', notification.post);
 router.post('/api/friendrequestcancel', handleRejectFriendRequest.post);
 router.post('/api/friendrequestaccept', handleAcceptFriendRequest.post);

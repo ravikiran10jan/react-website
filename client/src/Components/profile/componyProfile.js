@@ -3,16 +3,18 @@ import Input from './input';
 import sessionCheckError from  './../../helpers/handleAuthentication';
 import './style.css';
 import SelectSkill from './selectSkill';
-import ImageUplode from './ImageUplode';
-import {storage} from './../../firebase/index';
-import Textarea from './textarea'
+import Textarea from './textarea';
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+ 
+const SweetAlert = withSwalInstance(swal);
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
 
-
+      show: false,
       formData:{
         firstName:'',
         lastName:'',
@@ -25,16 +27,14 @@ class Profile extends Component {
         selectedMasterSkill:'',
         Industry:'',
         position:'',
-        selectedLearnSkill: [],
+        selectedLearnSkill: '',
         id:'',
         website:'',
-        institution:'',
-        url: '',
+        institutionName:'',
+        last_select:'',
+        skill:''
         
       },
-      image: null,
-    
-      progress: 0,
  
      learnSkill : [
         { label: "Blockchain", value: 1 },
@@ -71,15 +71,22 @@ class Profile extends Component {
     ],
   
       Industrys: ['A', 'B', 'C', 'D'],
-      msg:''
-     
 
-     
+    Skills : [
+     "Blockchain",
+      "Machine Learning",
+      "core Java", 
+      "Hibernate", 
+
+    ],
+      msg:''
+
     };
 
 
  
   }
+
 
   componentDidMount() {
     const id = sessionCheckError(sessionStorage.getItem('token')).id;
@@ -88,10 +95,10 @@ class Profile extends Component {
       method: 'GET',
     }).then(res=>res.json())
       .then((res) => {
-      
-        
-        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,industry,Institution_name,website,position,id
-          } = res[0]
+        console.log("didmount",res[0]);
+
+        const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,industry,institution_name,website,position,id,skills_learn,skills_masterd
+        } = res[0]
 
         this.setState({
           formData: {
@@ -107,7 +114,9 @@ class Profile extends Component {
             Industry:industry,
             id:id,
             website:website,
-            institution:Institution_name,
+            institutionName:institution_name,
+            selectedLearnSkill:skills_learn,
+            selectedMasterSkill:skills_masterd
           
           }
         })
@@ -119,44 +128,19 @@ class Profile extends Component {
         
       });
   }
-
   handleChange = (e) => {
     const { value, name } = e.target;
+
     this.setState((prevState) => {
       const formData = JSON.parse(JSON.stringify(prevState.formData));
       formData[name] = value;
+     
+
+      
       return { formData };
     });
   }
-  handleChangeImage = e => {
-    if (e.target.files[0]) {
-      const image = e.target.files[0];
-      this.setState(() => ({image}));
-    }
 
- 
-  }
-  handleUploadImage = () => {
-      const {image} = this.state;
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      uploadTask.on('state_changed', 
-      (snapshot) => {
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        this.setState({progress});
-      }, 
-      (error) => {
-        console.log(error);
-      }, 
-    () => {
-        storage.ref('images').child(image.name).getDownloadURL().then(url => {
-          this.setState(prevState => {
-            let formData = Object.assign({}, prevState.formData);  
-            formData.url = url;                                     
-            return {formData};                            
-          })
-        })
-    });
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -172,11 +156,39 @@ class Profile extends Component {
     }).then(res=>res.json())
       .then((res) => {
         if (res.err) {
-          this.setState({msg: 'Some error happened, please try save the data again'});
+          this.setState({msg: 'Some error happened, please try save the data again',show:true,});
         }
         else{
-         
-        this.setState({msg: 'Your profile has been updated'});
+      
+     
+       
+          const {first_name,last_name,email,company_name,linked_profile,skypeid,about_me,achievement,industry,institution_name,website,position,skills_learn,skills_masterd
+
+          } = res.result[0]
+        
+        this.setState({
+          formData: {
+            firstName:first_name,
+            lastName:last_name,
+            email:email,
+            Company:company_name,
+            linkedin:linked_profile,
+            skype:skypeid,
+            aboutMe: about_me,
+            achievement:achievement,
+            position:position,
+            Industry:industry,
+            website:website,
+            institutionName:institution_name,
+            selectedLearnSkill:skills_learn,
+            selectedMasterSkill:skills_masterd,
+           
+          
+          },
+          msg: 'Your profile has been updated',
+          show:true,
+       
+        })
         }
       })
       .catch((err) => {
@@ -209,13 +221,9 @@ class Profile extends Component {
 
   
 
-    
-   
-    
-    const { Industrys,msg}= this.state;
-    const {Industry,firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,website, institution}= this.state.formData;
-   
-
+    const { Industrys,msg }= this.state;
+    const {Industry,firstName,lastName,email,Company,linkedin,skype,aboutMe,achievement,website, institutionName,selectedMasterSkill,position,selectedLearnSkill,skill}= this.state.formData;
+  
     return (
       <div className=" main page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
       <div className="wrapper wrapper--w680">
@@ -243,7 +251,7 @@ class Profile extends Component {
         <Input label="Website" type="text" name="website" value={website} onChange={this.handleChange}/>
         </div>
         <div className="col-2">
-        <Input label="Institution Name" type="text" name="institution" value={institution} onChange={this.handleChange}/>
+        <Input label="Institution Name" type="text" name="institutionName" value={institutionName} onChange={this.handleChange}/>
         </div>
         <div className="col-2">
         <Input label="LinkedIn Profile" type="text" name="linkedin" value={linkedin} onChange={this.handleChange}/>
@@ -255,7 +263,7 @@ class Profile extends Component {
         <div className="input-group">
         
         <label className="label"> Industry </label>
-        <select className="input--style-4" name="Industry" id="Industry" value={Industry? Industry:"no-value"} onChange={this.handleChange} >
+        <select className="input--style-4 select--style-4 " name="Industry" id="Industry" value={Industry? Industry:"no-value"} onChange={this.handleChange} >
             <option disabled value="no-value">Select a Industry</option>
             {Industrys.map(Industry => {
               return <option key={Industry} value={Industry.toUpperCase()}>{Industry}</option>
@@ -275,28 +283,41 @@ class Profile extends Component {
         <div className="col-2">
         
        
-        <SelectSkill label='skill to learn' learnSkill ={this.state.learnSkill}  onChangeSelect={this.handleChangeLearnSkill} valueSelect={this.state.formData.selectedLearnSkill} />
+        <SelectSkill label ='skills mastered' learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={selectedMasterSkill} key={this.state.masterSkill.value} />
      
         </div>
         <div className="col-2">  
+        <SelectSkill label ='skills learned' learnSkill ={this.state.learnSkill  }  onChangeSelect={this.handleChangeLearnSkill} valueSelect={selectedLearnSkill} key={this.state.learnSkill.value}/>
       
-        <SelectSkill label ='master to learn' learnSkill ={this.state.masterSkill }  onChangeSelect={this.handleChangeMasterSkill} valueSelect={this.state.formData.selectedMasterSkill} />
     
         </div>
-        <div className="col-4">  
-       <ImageUplode label='image' handleChangeImage={this.handleChangeImage } handleUploadImage={this.handleUploadImage}  url={this.state.formData.url} progress={this.state.progress}/>
-      
-       </div>
+        
+     
        
         <div className="p-t-15">
-        <button className="btn btn--radius-2 btn--blue">
+        <button className="btn btn--radius-2 btn--color">
 update profile
             </button>
             </div>
 </div>
 </form>
-<div><p>
-  </p>{msg}</div>
+<div>
+
+  
+  
+
+  {this.state.show &&
+      <SweetAlert
+        show={this.state.show}
+        title="update profile"
+        text={msg}
+        onConfirm={() => this.setState({ show: false })}
+      />
+  }
+  
+  </div>
+   
+
   </div>
           </div>
           </div>

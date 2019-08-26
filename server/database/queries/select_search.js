@@ -35,18 +35,6 @@ const insertFriendRequest = ({ sender_id, recive_id }, cb) => {
 };
 
 
-// const checkFriendRelation = ({sender_id, recive_id}, cb) => {
-// 	let sql = {
-// 		text: 'select * from connections where sender_user_id = $1 OR receiver_user_id = $1',
-// 		values: [sender_id, recive_id]
-// 	}
-// 		db.query(sql, (err, results) =>{
-// 			if(err) return cb(err);
-// 			return cb(null, results.rows)
-// 		} )
-// }
-
-
 const notificationFriendRequest = (data, cb) => {
   const sql = {
     text: 'select users.first_name, connections.id from users INNER JOIN connections ON connections.sender_user_id = users.id where connections.receiver_user_id = $1 AND relation_state = $2',

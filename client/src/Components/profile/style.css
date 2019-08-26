@@ -255,7 +255,7 @@
      ========================================================================== */
   .btn {
     display: inline-block;
-    line-height: 50px;
+    line-height: 40px;
     padding: 0 50px;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -268,20 +268,22 @@
   }
   
   .btn--radius {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
   }
   
   .btn--radius-2 {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: none
   }
   .btn-uplodeImg {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    border: none;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     display: inline-block;
     line-height: 10px;
     padding: 10px 10px;
@@ -310,13 +312,13 @@
     background: #4dae3c;
   }
   
-  .btn--blue {
-    background: #4272d7;
+  .btn--color {
+    background: #823274;
+    
   }
   
-  .btn--blue:hover {
-    background: #3868cd;
-    color:#1c0f20
+  .btn--color:hover {
+    color:#1c1b1d
   }
   
   /* ==========================================================================
@@ -387,21 +389,33 @@
   .input--style-4 {
     line-height: 40px;
     background: #fafafa;
-    -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    /* -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
     -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
-    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08); */
+    line-height: 40px;
+    background: #fafafa;
     border-radius: 5px;
     padding: 0 20px;
     font-size: 16px;
+    border: none;
     color: #666;
+    border-bottom: 2px solid #6c40794a;
+    border-right: 2px solid #6c40794a;
+    transition: all 0.4s ease;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     transition: all 0.4s ease;
   }
+  .input--style-4 textarea{
+    height: 50px;
+  }
   
+  .css-yk16xz-control{
+    border-bottom: 2px solid #6c40794a;
+    border-right: 2px solid #6c40794a;
+
+  }
   .input--style-4::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
     color: #666;
@@ -665,3 +679,14 @@
       padding: 50px 40px;
     }
   }
+
+
+  .svg-inline--fa.fa-w-16 {
+    width: 2em;
+}
+
+#Industry{
+  width: 238px;
+  height: 42px;
+}
+
